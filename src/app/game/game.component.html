@@ -1,0 +1,47 @@
+<div *ngIf="playerWins" class="alert alert-success" role="alert">
+	<h1>YOU WIN IN [{{gameTimeString | date: 'mm:ss'}}]</h1>
+</div>
+<div *ngIf="!playerWins" class="container">
+	<div class="row">
+		<span class="col-md-6 alert alert-primary" role="alert">
+			<b>currentVerb:</b> <span *ngIf="currentVerb">{{currentVerb.present}}</span>
+		</span>
+		<span class="col-md-6 alert alert-primary" style="text-align: right" role="alert">
+			<b>Tiempo: gameTimeString</b> [{{gameTimeString | date: 'mm:ss'}}]
+		</span>
+	</div>
+	<div class="form-group row">
+		<span class="input-group col-md-4">
+			<span class="input-group-addon" for="userPast">Past</span> 
+			<input class="form-control" placeholder="past" id="userPast" [(ngModel)]="userPast" required (keyup)="play($event)" />
+			<span *ngIf="userPastOK">OK</span>
+		</span>
+	
+		<span class="input-group col-md-4">
+			<span class="input-group-addon" for="userPastParticiple">Past Participle</span> 
+			<input class="form-control" id="userPastParticiple" [(ngModel)]="userPastParticiple" required (keyup)="play($event)" /> 
+			<span *ngIf="userPastParticipleOK">OK</span> 
+		</span>
+		
+		<span class="input-group col-md-4">
+			<span class="input-group-addon" for="userTranslation">Translation</span>
+			<input class="form-control" id="userTranslation" [(ngModel)]="userTranslation" required (keyup)="play($event)" /> 
+			<span *ngIf="userTranslationOK">OK</span>
+		</span>
+	</div>
+
+	<div class="row">
+		<span class="col-md-6">
+			<h1>Verbos acertados {{knownVerbs.length}}</h1>
+		</span>
+		<span class="col-md-6" style="text-align: right">
+			<h1>Verbos restantes {{verbs.length}}</h1>
+		</span>
+	</div>
+	<ul>
+		<li *ngFor="let knowVerb of knownVerbs">{{knowVerb.present}} -
+			{{knowVerb.past}} - {{knowVerb.pastParticiple}} :
+			{{knowVerb.translation}}</li>
+	</ul>
+	
+</div>
